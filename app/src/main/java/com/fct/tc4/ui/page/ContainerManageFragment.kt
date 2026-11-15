@@ -159,13 +159,16 @@ class ContainerManageFragment : Fragment() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.containers.collect { list ->
+                    // Fragment 的 view 可能已经销毁，异步回调里不能再直接用 binding!!
+                    val b = _binding ?: return@collect
                     val isIdle = viewModel.pageState.value is ContainerManagePageState.Idle
-                    binding.emptyHint.visibility = if (list.isEmpty() && isIdle) View.VISIBLE else View.GONE
+                    b.emptyHint.visibility = if (list.isEmpty() && isIdle) View.VISIBLE else View.GONE
                     adapter.submitList(list) {
-                        binding.indicator.setupWithViewPager(binding.viewpager)
+                        val bb = _binding ?: return@submitList
+                        bb.indicator.setupWithViewPager(bb.viewpager)
                         val pos = viewModel.selectedPosition.value
                         if (pos in 0 until adapter.itemCount) {
-                            binding.viewpager.setCurrentItem(pos, false)
+                            bb.viewpager.setCurrentItem(pos, false)
                         }
                     }
                 }

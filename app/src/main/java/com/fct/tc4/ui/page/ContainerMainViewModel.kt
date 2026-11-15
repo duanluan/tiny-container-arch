@@ -159,17 +159,50 @@ class ContainerMainViewModel(
                 if (feature["enabled"] as? Boolean != true) continue
                 when (type) {
                     "webview" -> {
-                        val link = feature["link"] as? String ?: return@launch
+                        val link = feature["link"] as? String ?: continue
+                        val command = feature["command"] as? String ?: continue
+                        Global.sendCommand(command)
+                        val port = extractPort(link) ?: continue
+                        if (!waitForPort(port)) continue
                         _navigationEvents.tryEmit(GuiNavigationEvent.OpenWebView(link))
                     }
                     "avnc" -> {
-                        val link = feature["link"] as? String ?: return@launch
-                        val adaptToScreenSize = feature["adapt_to_screen_size"] as? Boolean ?: return@launch
-                        val scaleRatio = (feature["scale_ratio"] as? Number)?.toDouble() ?: return@launch
+                        val link = feature["link"] as? String ?: continue
+                        val command = feature["command"] as? String ?: continue
+                        val adaptToScreenSize = feature["adapt_to_screen_size"] as? Boolean ?: continue
+                        val scaleRatio = (feature["scale_ratio"] as? Number)?.toDouble() ?: continue
                         val useUnixSocket = feature["use_unix_socket"] as? Boolean ?: true
+                        val app = getApplication<Application>()
+                        // 手动点“进入图形界面”时，如果服务还没起来就先执行启动命令
+                        if (useUnixSocket) {
+                            val socket = File(app.filesDir, "tmp/.tiny.vnc")
+                            if (!socket.exists()) {
+                                Global.sendCommand(command)
+                                if (!waitForFile(socket.absolutePath)) {
+                                    Log.e(TAG, "avnc: VNC socket not ready")
+                                    continue
+                                }
+                            }
+                        } else {
+                            val port = extractPort(link) ?: continue
+                            Global.sendCommand(command)
+                            if (!waitForPort(port)) {
+                                Log.e(TAG, "avnc: port $port not ready")
+                                continue
+                            }
+                        }
                         _navigationEvents.tryEmit(GuiNavigationEvent.OpenAvnc(link, adaptToScreenSize, scaleRatio, useUnixSocket))
                     }
                     "x11" -> {
+                        val args = feature["args"] as? List<String> ?: continue
+                        val command = feature["command"] as? String ?: continue
+                        val app = getApplication<Application>()
+                        launchXServer(args)
+                        if (!waitForFile("${app.filesDir}/tmp/.X11-unix/X${extractDisplay(args)}")) {
+                            Log.e(TAG, "x11: socket not ready")
+                            continue
+                        }
+                        Global.sendCommand(command)
                         _navigationEvents.tryEmit(GuiNavigationEvent.OpenX11)
                     }
                 }
