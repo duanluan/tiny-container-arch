@@ -15,7 +15,7 @@ Arch Linux ARM 定制分支。
   - `UpdateChecker.kt`
   - `HelpFragment.kt`
   - `ContainerMainFragment.kt`
-- App 版本号：`4.2.3-arch3`（`versionCode = 4020303`）
+- App 版本号：`4.2.3-arch4`（`versionCode = 4020304`）
 - 构建套件已迁到镜像仓库，App 仓库更接近上游，方便同步
 
 ## 构建 APK
@@ -48,10 +48,10 @@ unzip -q /tmp/tc-jni/jniLibs.zip -d app/src/main/
 更新检查读取本仓库的 `releases/latest`，tag 使用 `v<版本>-arch<N>`：
 
 ```bash
-gh release create v4.2.3-arch3 \
+gh release create v4.2.3-arch4 \
   app/build/outputs/apk/release/tiny-container-arch.apk \
   -R duanluan/tiny-container-arch \
-  --title "Tiny Container Arch 4.2.3-arch3" \
+  --title "Tiny Container Arch 4.2.3-arch4" \
   --notes "Arch 定制版" \
   --latest
 ```
@@ -65,10 +65,10 @@ gh release create v4.2.3-arch3 \
 ## AVNC 触摸板旋转补丁
 
 Samsung Book Cover Keyboard 的触摸板在横屏时上报的是竖屏自然坐标，AVNC
-没有做旋转补偿，导致触摸板上下/左右互换。本分支使用本地补丁版 AVNC：
+没有做旋转补偿，导致触摸板上下/左右互换；同时指针捕获模式下轻点不会产生鼠标左键事件。本分支使用本地补丁版 AVNC：
 
-- 坐标：`com.github.tiny-computer:avnc:030e6c032e-arch1`（从 mavenLocal 解析）
-- 补丁：`patches/avnc-touchpad-rotation.patch`
+- 坐标：`com.github.tiny-computer:avnc:030e6c032e-arch2`（从 mavenLocal 解析）
+- 补丁：`patches/avnc-touchpad-fixes.patch`
 - App 的 `settings.gradle.kts` 已加入 `mavenLocal()`，
   `gradle/libs.versions.toml` 使用上面的版本号
 
@@ -79,7 +79,7 @@ git clone https://github.com/tiny-computer/avnc
 cd avnc
 git checkout 030e6c0
 git submodule update --init --recursive
-git apply /path/to/patches/avnc-touchpad-rotation.patch
+git apply /path/to/patches/avnc-touchpad-fixes.patch
 echo "sdk.dir=$HOME/Android/Sdk" > local.properties
 ./gradlew :app:publishToMavenLocal
 ```
