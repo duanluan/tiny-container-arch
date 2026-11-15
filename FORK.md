@@ -15,7 +15,7 @@ Arch Linux ARM 定制分支。
   - `UpdateChecker.kt`
   - `HelpFragment.kt`
   - `ContainerMainFragment.kt`
-- App 版本号：`4.2.3-arch1`（`versionCode = 4020301`）
+- App 版本号：`4.2.3-arch2`（`versionCode = 4020302`）
 - 构建套件已迁到镜像仓库，App 仓库更接近上游，方便同步
 
 ## 构建 APK
@@ -48,10 +48,10 @@ unzip -q /tmp/tc-jni/jniLibs.zip -d app/src/main/
 更新检查读取本仓库的 `releases/latest`，tag 使用 `v<版本>-arch<N>`：
 
 ```bash
-gh release create v4.2.3-arch1 \
+gh release create v4.2.3-arch2 \
   app/build/outputs/apk/release/tiny-container-arch.apk \
   -R duanluan/tiny-container-arch \
-  --title "Tiny Container Arch 4.2.3-arch1" \
+  --title "Tiny Container Arch 4.2.3-arch2" \
   --notes "Arch 定制版" \
   --latest
 ```
