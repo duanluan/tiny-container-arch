@@ -1,18 +1,19 @@
 #!/usr/bin/env bash
-# 构建 Tiny Container 的 Linux 容器镜像，输出可导入的 rootfs.tar.zst。
+# 构建 Arch Linux ARM 容器镜像，输出可导入 Tiny Container 的 rootfs.tar.zst。
 #
 # 用法：
-#   ./build.sh                      # 默认构建 Arch Linux ARM（推荐）
-#   ./build.sh --xfce               # Arch + XFCE/TigerVNC/PipeWire + 字体
-#   ./build.sh --distro manjaro     # 构建 Manjaro ARM（仓库已停更，仅作对照）
+#   ./build.sh                      # 最小命令行容器
+#   ./build.sh --xfce               # XFCE/TigerVNC/PipeWire + 字体
 #   ./build.sh --with-app-assets    # 同时复制到 app/src/main/assets/rootfs.tar.zst
 #
 # 可用环境变量：
-#   MIRROR           pacman 镜像（按发行版有默认值）
+#   MIRROR           pacman 主镜像，默认清华 TUNA
+#   MIRROR_FALLBACKS 备用镜像（空格分隔）
 #   TZ_NAME          时区，默认 Asia/Shanghai
 #   IMAGE_TAG        本地 Docker 镜像标签
 #   ZSTD_LEVEL       压缩级别，默认 3
 #   ARCH_ROOTFS_URL  Arch Linux ARM rootfs 地址
+#   FORCE_BASE_IMPORT=1  rootfs 更新后强制重新导入
 #   KEEP_WORK=1      保留 .work 中间目录
 set -euo pipefail
 
@@ -23,7 +24,12 @@ DIST="$HERE/dist"
 WORK="$HERE/.work"
 CACHE="$HERE/.cache"
 
-DISTRO=arch
+ARCH_DIR="$HERE/arch"
+BASE_IMAGE="${BASE_IMAGE:-tiny-container-arch-base:local}"
+MIRROR="${MIRROR:-https://mirrors.tuna.tsinghua.edu.cn/archlinuxarm}"
+IMAGE_TAG="${IMAGE_TAG:-tiny-container-arch:local}"
+ARCH_ROOTFS_URL="${ARCH_ROOTFS_URL:-https://mirrors.tuna.tsinghua.edu.cn/archlinuxarm/os/ArchLinuxARM-aarch64-latest.tar.gz}"
+
 INSTALL_XFCE=0
 INSTALL_FONTS=0
 WITH_APP_ASSETS=0
@@ -31,12 +37,11 @@ ZSTD_LEVEL="${ZSTD_LEVEL:-3}"
 TZ_NAME="${TZ_NAME:-Asia/Shanghai}"
 
 usage() {
-    sed -n '2,20p' "$0" | sed 's/^# \{0,1\}//'
+    sed -n '2,16p' "$0" | sed 's/^# \{0,1\}//'
 }
 
 while [ $# -gt 0 ]; do
     case "$1" in
-        --distro)          DISTRO="$2"; shift ;;
         --xfce)            INSTALL_XFCE=1; INSTALL_FONTS=1 ;;
         --fonts)           INSTALL_FONTS=1 ;;
         --with-app-assets) WITH_APP_ASSETS=1 ;;
@@ -58,25 +63,6 @@ clean_work() {
     rm -rf "$WORK" 2>/dev/null || true
 }
 
-case "$DISTRO" in
-    arch)
-        DISTRO_DIR="$HERE/arch"
-        BASE_IMAGE="${BASE_IMAGE:-tiny-container-arch-base:local}"
-        MIRROR="${MIRROR:-https://mirrors.tuna.tsinghua.edu.cn/archlinuxarm}"
-        IMAGE_TAG="${IMAGE_TAG:-tiny-container-arch:local}"
-        ARCH_ROOTFS_URL="${ARCH_ROOTFS_URL:-https://mirrors.tuna.tsinghua.edu.cn/archlinuxarm/os/ArchLinuxARM-aarch64-latest.tar.gz}"
-        ;;
-    manjaro)
-        DISTRO_DIR="$HERE/manjaro"
-        BASE_IMAGE="${BASE_IMAGE:-manjarolinux/base:latest}"
-        MIRROR="${MIRROR:-https://mirrors.tuna.tsinghua.edu.cn/manjaro/arm-stable}"
-        IMAGE_TAG="${IMAGE_TAG:-tiny-container-manjaro:local}"
-        ;;
-    *)
-        die "未知发行版: $DISTRO（可选 arch / manjaro）"
-        ;;
-esac
-
 command -v docker >/dev/null 2>&1 || die "需要安装 Docker"
 command -v zstd >/dev/null 2>&1 || die "需要安装 zstd"
 docker info >/dev/null 2>&1 || die "Docker 未运行，或当前用户不在 docker 组"
@@ -87,40 +73,38 @@ if [ ! -e /proc/sys/fs/binfmt_misc/qemu-aarch64 ]; then
     docker run --privileged --rm tonistiigi/binfmt --install arm64
 fi
 
-if [ "$DISTRO" = "arch" ]; then
-    rootfs_tarball="$CACHE/ArchLinuxARM-aarch64-latest.tar.gz"
-    mkdir -p "$CACHE"
+rootfs_tarball="$CACHE/ArchLinuxARM-aarch64-latest.tar.gz"
+mkdir -p "$CACHE"
 
-    downloaded=0
-    if [ ! -f "$rootfs_tarball" ]; then
-        echo "==> 下载 Arch Linux ARM rootfs（约 791 MB，只需一次）"
-        curl -L --fail --retry 3 --progress-bar \
-            -o "$rootfs_tarball.part" "$ARCH_ROOTFS_URL"
-        mv "$rootfs_tarball.part" "$rootfs_tarball"
-        downloaded=1
-    fi
-
-    if curl -fsSL --max-time 30 "$ARCH_ROOTFS_URL.md5" -o "$CACHE/rootfs.md5"; then
-        echo "==> 校验 rootfs MD5"
-        expected="$(awk '{print $1}' "$CACHE/rootfs.md5")"
-        actual="$(md5sum "$rootfs_tarball" | awk '{print $1}')"
-        [ "$expected" = "$actual" ] || die "rootfs MD5 不匹配（expected=$expected actual=$actual）"
-    else
-        echo "==> 未找到 .md5，跳过校验"
-    fi
-
-    # 复用已导入的镜像，避免每次构建都重新 import（会破坏 Docker 构建缓存）。
-    # rootfs 更新后可用 FORCE_BASE_IMPORT=1 强制重新导入。
-    if [ "$downloaded" = "1" ] || [ "${FORCE_BASE_IMPORT:-0}" = "1" ] \
-        || ! docker image inspect "$BASE_IMAGE" >/dev/null 2>&1; then
-        echo "==> 导入 Arch Linux ARM rootfs 为基础镜像: $BASE_IMAGE"
-        docker import --platform linux/arm64 "$rootfs_tarball" "$BASE_IMAGE" >/dev/null
-    else
-        echo "==> 复用已导入的基础镜像: $BASE_IMAGE"
-    fi
+downloaded=0
+if [ ! -f "$rootfs_tarball" ]; then
+    echo "==> 下载 Arch Linux ARM rootfs（约 791 MB，只需一次）"
+    curl -L --fail --retry 3 --progress-bar \
+        -o "$rootfs_tarball.part" "$ARCH_ROOTFS_URL"
+    mv "$rootfs_tarball.part" "$rootfs_tarball"
+    downloaded=1
 fi
 
-echo "==> 构建 $DISTRO 镜像: $IMAGE_TAG"
+if curl -fsSL --max-time 30 "$ARCH_ROOTFS_URL.md5" -o "$CACHE/rootfs.md5"; then
+    echo "==> 校验 rootfs MD5"
+    expected="$(awk '{print $1}' "$CACHE/rootfs.md5")"
+    actual="$(md5sum "$rootfs_tarball" | awk '{print $1}')"
+    [ "$expected" = "$actual" ] || die "rootfs MD5 不匹配（expected=$expected actual=$actual）"
+else
+    echo "==> 未找到 .md5，跳过校验"
+fi
+
+# 复用已导入的镜像，避免每次构建都重新 import（会破坏 Docker 构建缓存）。
+# rootfs 更新后可用 FORCE_BASE_IMPORT=1 强制重新导入。
+if [ "$downloaded" = "1" ] || [ "${FORCE_BASE_IMPORT:-0}" = "1" ] \
+    || ! docker image inspect "$BASE_IMAGE" >/dev/null 2>&1; then
+    echo "==> 导入 Arch Linux ARM rootfs 为基础镜像: $BASE_IMAGE"
+    docker import --platform linux/arm64 "$rootfs_tarball" "$BASE_IMAGE" >/dev/null
+else
+    echo "==> 复用已导入的基础镜像: $BASE_IMAGE"
+fi
+
+echo "==> 构建 Arch Linux ARM 镜像: $IMAGE_TAG"
 echo "    base=$BASE_IMAGE"
 echo "    mirror=$MIRROR tz=$TZ_NAME xfce=$INSTALL_XFCE fonts=$INSTALL_FONTS"
 docker build \
@@ -130,7 +114,7 @@ docker build \
     --build-arg "TZ_NAME=$TZ_NAME" \
     --build-arg "INSTALL_XFCE=$INSTALL_XFCE" \
     --build-arg "INSTALL_FONTS=$INSTALL_FONTS" \
-    -f "$DISTRO_DIR/Dockerfile" \
+    -f "$ARCH_DIR/Dockerfile" \
     -t "$IMAGE_TAG" "$HERE"
 
 echo "==> 导出容器文件系统"
@@ -147,7 +131,7 @@ trap - EXIT
 echo "==> 组装 rootfs.tar（保持 root 属主、.tiny.yaml 放在最前）"
 docker run --rm --platform linux/amd64 \
     -v "$WORK:/work" \
-    -v "$DISTRO_DIR/tiny.yaml:/src/tiny.yaml:ro" \
+    -v "$ARCH_DIR/tiny.yaml:/src/tiny.yaml:ro" \
     debian:stable-slim bash -eo pipefail -c '
         cd /work
         rm -rf rootfs
@@ -190,14 +174,14 @@ docker run --rm --platform linux/amd64 \
     '
 
 echo "==> 压缩"
-output="$DIST/$DISTRO-rootfs.tar.zst"
+output="$DIST/arch-rootfs.tar.zst"
 zstd -T0 -"$ZSTD_LEVEL" -f -q "$WORK/rootfs.tar" -o "$output"
 cp -f "$output" "$DIST/rootfs.tar.zst"
 
 # 用 sed 而不是 head：head 提前退出会让 tar 收到 SIGPIPE，配合 pipefail 会误报失败
 first_entry="$(tar --zstd -tf "$output" | sed -n '1p')"
 [ "$first_entry" = ".tiny.yaml" ] || die "rootfs.tar.zst 的第一个条目不是 .tiny.yaml（实际: $first_entry）"
-grep -q "^code: \"$DISTRO\"" "$DISTRO_DIR/tiny.yaml" || die "$DISTRO_DIR/tiny.yaml 的 code 与 --distro 不一致"
+grep -q '^code: "arch"' "$ARCH_DIR/tiny.yaml" || die "$ARCH_DIR/tiny.yaml 的 code 不是 arch"
 
 if [ "$WITH_APP_ASSETS" = "1" ]; then
     assets="$REPO_DIR/app/src/main/assets"
@@ -216,4 +200,4 @@ ls -lh "$output"
 echo
 echo "导入方式（任选其一）："
 echo "  1. adb push $output /sdcard/Download/ 然后在 App 里“导入容器”"
-echo "  2. ./build.sh --distro $DISTRO --xfce --with-app-assets 后重新构建 APK，首启会自动安装内置容器"
+echo "  2. ./build.sh --xfce --with-app-assets 后重新构建 APK，首启会自动安装内置容器"
