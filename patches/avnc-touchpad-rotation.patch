@@ -1,0 +1,77 @@
+diff --git a/app/build.gradle b/app/build.gradle
+index a62702f..7cab1a3 100644
+--- a/app/build.gradle
++++ b/app/build.gradle
+@@ -38,6 +38,7 @@ android {
+             }
+         }
+ 
++        ndk { abiFilters "arm64-v8a" }
+         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+     }
+ 
+@@ -133,7 +134,7 @@ publishing {
+         release(MavenPublication) {
+             groupId = 'com.github.tiny-computer'
+             artifactId = 'avnc'
+-            version = '3.2.2'
++            version = '030e6c032e-arch1'
+ 
+             afterEvaluate {
+                 from components.release
+diff --git a/app/src/main/java/com/gaurav/avnc/ui/vnc/input/TouchHandler.kt b/app/src/main/java/com/gaurav/avnc/ui/vnc/input/TouchHandler.kt
+index 6b5bfb9..aca3ecb 100644
+--- a/app/src/main/java/com/gaurav/avnc/ui/vnc/input/TouchHandler.kt
++++ b/app/src/main/java/com/gaurav/avnc/ui/vnc/input/TouchHandler.kt
+@@ -17,6 +17,7 @@ import android.view.HapticFeedbackConstants
+ import android.view.InputDevice
+ import android.view.MotionEvent
+ import android.view.ScaleGestureDetector
++import android.view.Surface
+ import android.view.ViewConfiguration
+ import com.gaurav.avnc.ui.vnc.FrameView
+ import com.gaurav.avnc.util.AppPreferences
+@@ -112,8 +113,8 @@ class TouchHandler(private val frameView: FrameView, private val dispatcher: Dis
+             return false
+ 
+         val screenDensity = frameView.context.resources.displayMetrics.density
+-        val dx: Float
+-        val dy: Float
++        var dx: Float
++        var dy: Float
+ 
+         if (e.isFromSource(InputDevice.SOURCE_MOUSE_RELATIVE)) {
+             dx = getTotalAxisValue(e, MotionEvent.AXIS_X) * screenDensity
+@@ -124,6 +125,32 @@ class TouchHandler(private val frameView: FrameView, private val dispatcher: Dis
+         } else
+             return false
+ 
++        // External keyboard touchpads (e.g. Samsung Book Cover Keyboard) report
++        // relative axes in the device's natural (portrait) orientation. Once the
++        // pointer is captured, Android may deliver them as SOURCE_MOUSE_RELATIVE,
++        // so detect the device by name as well. A real mouse is left untouched.
++        val deviceName = InputDevice.getDevice(e.deviceId)?.name.orEmpty()
++        val isTouchpad = e.isFromSource(InputDevice.SOURCE_TOUCHPAD) ||
++                deviceName.contains("touchpad", ignoreCase = true)
++        if (isTouchpad) {
++            when (frameView.display?.rotation ?: Surface.ROTATION_0) {
++                Surface.ROTATION_90 -> {
++                    val t = dx
++                    dx = dy
++                    dy = -t
++                }
++                Surface.ROTATION_180 -> {
++                    dx = -dx
++                    dy = -dy
++                }
++                Surface.ROTATION_270 -> {
++                    val t = dx
++                    dx = -dy
++                    dy = t
++                }
++            }
++        }
++
+         when (e.actionMasked) {
+             MotionEvent.ACTION_BUTTON_PRESS -> dispatcher.onCapturedMouseButtonDown(convertButton(e.actionButton))
+             MotionEvent.ACTION_BUTTON_RELEASE -> dispatcher.onCapturedMouseButtonUp(convertButton(e.actionButton))

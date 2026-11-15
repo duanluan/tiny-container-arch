@@ -31,6 +31,8 @@ pluginManagement {
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
+        // 本地构建的补丁版 AVNC（触摸板轴向旋转修复）
+        mavenLocal()
         google()
         mavenCentral()
         maven { url = uri("https://jitpack.io") }
