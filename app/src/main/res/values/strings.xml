@@ -268,7 +268,7 @@
     <!-- ==================== Container Main ==================== -->
     <string name="tc4_container_initializing">Initializing container…</string>
     <string name="tc4_container_loading">Loading container list…</string>
-    <string name="tc4_container_empty_with_link">No containers installed.\nDownload containers from the official page and import:\nhttps://www.github.com/tiny-computer/images/releases</string>
+    <string name="tc4_container_empty_with_link">No containers installed.\nDownload containers from the official page and import:\nhttps://github.com/duanluan/tiny-container-arch-images/releases</string>
     <string name="tc4_update_available">New version %1$s is available! Please update.</string>
 
     <!-- ==================== More Helper Texts ==================== -->

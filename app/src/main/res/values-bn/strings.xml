@@ -269,7 +269,7 @@
     <!-- ==================== Container Main ==================== -->
     <string name="tc4_container_initializing">কন্টেইনার ইনিশিয়ালাইজ করা হচ্ছে…</string>
     <string name="tc4_container_loading">কন্টেইনার তালিকা লোড হচ্ছে…</string>
-    <string name="tc4_container_empty_with_link">কোনো কন্টেইনার ইনস্টল নেই।\nঅফিসিয়াল পৃষ্ঠা থেকে কন্টেইনার ডাউনলোড করে ইম্পোর্ট করুন:\nhttps://www.github.com/tiny-computer/images/releases</string>
+    <string name="tc4_container_empty_with_link">কোনো কন্টেইনার ইনস্টল নেই।\nঅফিসিয়াল পৃষ্ঠা থেকে কন্টেইনার ডাউনলোড করে ইম্পোর্ট করুন:\nhttps://github.com/duanluan/tiny-container-arch-images/releases</string>
     <string name="tc4_update_available">নতুন সংস্করণ %1$s উপলব্ধ! অনুগ্রহ করে আপডেট করুন।</string>
 
     <!-- ==================== More Helper Texts ==================== -->

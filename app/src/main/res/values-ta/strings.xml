@@ -204,7 +204,7 @@
     <string name="tc4_help_description">திட்டத் தகவலைக் காண, உதவி மற்றும் புதுப்பிப்புகளைப் பெற</string>
     <string name="tc4_container_initializing">கொள்கலனைத் துவக்குகிறது…</string>
     <string name="tc4_container_loading">கொள்கலன் பட்டியலை ஏற்றுகிறது…</string>
-    <string name="tc4_container_empty_with_link">கொள்கலன்கள் எதுவும் நிறுவப்படவில்லை.\nஅதிகாரப்பூர்வ பக்கத்திலிருந்து கொள்கலன்களைப் பதிவிறக்கி இறக்குமதி செய்க:\nhttps://www.github.com/tiny-computer/images/releases</string>
+    <string name="tc4_container_empty_with_link">கொள்கலன்கள் எதுவும் நிறுவப்படவில்லை.\nஅதிகாரப்பூர்வ பக்கத்திலிருந்து கொள்கலன்களைப் பதிவிறக்கி இறக்குமதி செய்க:\nhttps://github.com/duanluan/tiny-container-arch-images/releases</string>
     <string name="tc4_update_available">புதிய பதிப்பு %1$s கிடைக்கிறது! தயவுசெய்து புதுப்பிக்கவும்.</string>
     <string name="tc4_helper_cache_vars">ஒரு வரிக்கு ஒன்று, $CACHE_DIR மற்றும் $CONTAINER_DIR ஐ ஆதரிக்கிறது</string>
     <string name="tc4_validate_yaml_line_error">வரி %1$d: %2$s</string>

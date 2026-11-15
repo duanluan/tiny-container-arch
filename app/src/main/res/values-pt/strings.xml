@@ -204,7 +204,7 @@
     <string name="tc4_help_description">Ver informações do projeto, obter ajuda e atualizações</string>
     <string name="tc4_container_initializing">A inicializar contentor…</string>
     <string name="tc4_container_loading">A carregar lista de contentores…</string>
-    <string name="tc4_container_empty_with_link">Nenhum contentor instalado.\nTransfira contentores da página oficial e importe:\nhttps://www.github.com/tiny-computer/images/releases</string>
+    <string name="tc4_container_empty_with_link">Nenhum contentor instalado.\nTransfira contentores da página oficial e importe:\nhttps://github.com/duanluan/tiny-container-arch-images/releases</string>
     <string name="tc4_update_available">Nova versão %1$s disponível! Atualize por favor.</string>
     <string name="tc4_helper_cache_vars">Um por linha, suporta $CACHE_DIR e $CONTAINER_DIR</string>
     <string name="tc4_validate_yaml_line_error">Linha %1$d: %2$s</string>

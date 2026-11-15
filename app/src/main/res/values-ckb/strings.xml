@@ -237,7 +237,7 @@
 
     <string name="tc4_container_initializing">خۆڕێکخستنی کۆنتێنەر…</string>
     <string name="tc4_container_loading">بارکردنی لیستی کۆنتێنەر…</string>
-    <string name="tc4_container_empty_with_link">هیچ کۆنتێنەرێک دانەمەزراوە.\nکۆنتێنەرەکان لە پەڕەی فەرمی دابگرە و هاوردەیان بکە:\nhttps://www.github.com/tiny-computer/images/releases</string>
+    <string name="tc4_container_empty_with_link">هیچ کۆنتێنەرێک دانەمەزراوە.\nکۆنتێنەرەکان لە پەڕەی فەرمی دابگرە و هاوردەیان بکە:\nhttps://github.com/duanluan/tiny-container-arch-images/releases</string>
     <string name="tc4_update_available">وەشانی نوێ %1$s بەردەستە! تکایە نوێی بکەرەوە.</string>
 
     <string name="tc4_helper_cache_vars">یەکێک بۆ هەر هێڵێک، پشتگیری $CACHE_DIR و $CONTAINER_DIR دەکات</string>

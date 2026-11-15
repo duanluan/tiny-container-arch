@@ -237,7 +237,7 @@
 
     <string name="tc4_container_initializing">در حال مقداردهی اولیه کانتینر…</string>
     <string name="tc4_container_loading">در حال بارگذاری لیست کانتینر…</string>
-    <string name="tc4_container_empty_with_link">هیچ کانتینری نصب نشده است.\nکانتینرها را از صفحه رسمی دانلود و وارد کنید:\nhttps://www.github.com/tiny-computer/images/releases</string>
+    <string name="tc4_container_empty_with_link">هیچ کانتینری نصب نشده است.\nکانتینرها را از صفحه رسمی دانلود و وارد کنید:\nhttps://github.com/duanluan/tiny-container-arch-images/releases</string>
     <string name="tc4_update_available">نسخه جدید %1$s در دسترس است! لطفاً به‌روزرسانی کنید.</string>
 
     <string name="tc4_helper_cache_vars">یکی در هر خط، از $CACHE_DIR و $CONTAINER_DIR پشتیبانی می‌کند</string>

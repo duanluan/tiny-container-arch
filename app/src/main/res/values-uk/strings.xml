@@ -204,7 +204,7 @@
     <string name="tc4_help_description">Перегляд інформації про проект, отримання допомоги та оновлень</string>
     <string name="tc4_container_initializing">Ініціалізація контейнера…</string>
     <string name="tc4_container_loading">Завантаження списку контейнерів…</string>
-    <string name="tc4_container_empty_with_link">Немає встановлених контейнерів.\nЗавантажте контейнери з офіційної сторінки та імпортуйте:\nhttps://www.github.com/tiny-computer/images/releases</string>
+    <string name="tc4_container_empty_with_link">Немає встановлених контейнерів.\nЗавантажте контейнери з офіційної сторінки та імпортуйте:\nhttps://github.com/duanluan/tiny-container-arch-images/releases</string>
     <string name="tc4_update_available">Нова версія %1$s доступна! Будь ласка, оновіть.</string>
     <string name="tc4_helper_cache_vars">По одному на рядок, підтримує $CACHE_DIR і $CONTAINER_DIR</string>
     <string name="tc4_validate_yaml_line_error">Рядок %1$d: %2$s</string>

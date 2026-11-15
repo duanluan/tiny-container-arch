@@ -204,7 +204,7 @@
     <string name="tc4_help_description">Proje bilgilerini görüntüleyin, yardım ve güncellemeleri alın</string>
     <string name="tc4_container_initializing">Konteyner başlatılıyor…</string>
     <string name="tc4_container_loading">Konteyner listesi yükleniyor…</string>
-    <string name="tc4_container_empty_with_link">Yüklü konteyner yok.\nKonteynerleri resmi sayfadan indirin ve içe aktarın:\nhttps://www.github.com/tiny-computer/images/releases</string>
+    <string name="tc4_container_empty_with_link">Yüklü konteyner yok.\nKonteynerleri resmi sayfadan indirin ve içe aktarın:\nhttps://github.com/duanluan/tiny-container-arch-images/releases</string>
     <string name="tc4_update_available">Yeni sürüm %1$s mevcut! Lütfen güncelleyin.</string>
     <string name="tc4_helper_cache_vars">Satır başına bir, $CACHE_DIR ve $CONTAINER_DIR\'i destekler</string>
     <string name="tc4_validate_yaml_line_error">Satır %1$d: %2$s</string>

@@ -204,7 +204,7 @@
     <string name="tc4_help_description">Lihat maklumat projek, dapatkan bantuan dan kemas kini</string>
     <string name="tc4_container_initializing">Memulakan kontena…</string>
     <string name="tc4_container_loading">Memuatkan senarai kontena…</string>
-    <string name="tc4_container_empty_with_link">Tiada kontena dipasang.\nMuat turun kontena dari halaman rasmi dan import:\nhttps://www.github.com/tiny-computer/images/releases</string>
+    <string name="tc4_container_empty_with_link">Tiada kontena dipasang.\nMuat turun kontena dari halaman rasmi dan import:\nhttps://github.com/duanluan/tiny-container-arch-images/releases</string>
     <string name="tc4_update_available">Versi baharu %1$s tersedia! Sila kemas kini.</string>
     <string name="tc4_helper_cache_vars">Satu setiap baris, menyokong $CACHE_DIR dan $CONTAINER_DIR</string>
     <string name="tc4_validate_yaml_line_error">Baris %1$d: %2$s</string>

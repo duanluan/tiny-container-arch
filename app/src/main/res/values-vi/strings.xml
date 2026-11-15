@@ -204,7 +204,7 @@
     <string name="tc4_help_description">Xem thông tin dự án, nhận trợ giúp và cập nhật</string>
     <string name="tc4_container_initializing">Đang khởi tạo container…</string>
     <string name="tc4_container_loading">Đang tải danh sách container…</string>
-    <string name="tc4_container_empty_with_link">Chưa cài đặt container nào.\nTải container từ trang chính thức và nhập:\nhttps://www.github.com/tiny-computer/images/releases</string>
+    <string name="tc4_container_empty_with_link">Chưa cài đặt container nào.\nTải container từ trang chính thức và nhập:\nhttps://github.com/duanluan/tiny-container-arch-images/releases</string>
     <string name="tc4_update_available">Phiên bản mới %1$s đã có! Vui lòng cập nhật.</string>
     <string name="tc4_helper_cache_vars">Mỗi dòng một mục, hỗ trợ $CACHE_DIR và $CONTAINER_DIR</string>
     <string name="tc4_validate_yaml_line_error">Dòng %1$d: %2$s</string>

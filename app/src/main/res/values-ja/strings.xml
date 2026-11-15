@@ -236,7 +236,7 @@
 
     <string name="tc4_container_initializing">コンテナを初期化中…</string>
     <string name="tc4_container_loading">コンテナ一覧を読み込み中…</string>
-    <string name="tc4_container_empty_with_link">コンテナがインストールされていません。\n公式ページからコンテナをダウンロードしてインポートしてください：\nhttps://www.github.com/tiny-computer/images/releases</string>
+    <string name="tc4_container_empty_with_link">コンテナがインストールされていません。\n公式ページからコンテナをダウンロードしてインポートしてください：\nhttps://github.com/duanluan/tiny-container-arch-images/releases</string>
     <string name="tc4_update_available">新バージョン %1$s が利用可能です！更新してください。</string>
 
     <string name="tc4_helper_cache_vars">1行に1つ、$CACHE_DIR と $CONTAINER_DIR をサポート</string>

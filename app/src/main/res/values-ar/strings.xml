@@ -269,7 +269,7 @@
     <!-- ==================== Container Main ==================== -->
     <string name="tc4_container_initializing">جاري تهيئة الحاوية…</string>
     <string name="tc4_container_loading">جاري تحميل قائمة الحاويات…</string>
-    <string name="tc4_container_empty_with_link">لا توجد حاويات مثبتة.\nقم بتنزيل الحاويات من الصفحة الرسمية واستوردها:\nhttps://www.github.com/tiny-computer/images/releases</string>
+    <string name="tc4_container_empty_with_link">لا توجد حاويات مثبتة.\nقم بتنزيل الحاويات من الصفحة الرسمية واستوردها:\nhttps://github.com/duanluan/tiny-container-arch-images/releases</string>
     <string name="tc4_update_available">الإصدار الجديد %1$s متاح! يرجى التحديث.</string>
 
     <!-- ==================== More Helper Texts ==================== -->

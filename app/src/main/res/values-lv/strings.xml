@@ -205,7 +205,7 @@
     <string name="tc4_help_description">Skatīt projekta informāciju, saņemt palīdzību un atjauninājumus</string>
     <string name="tc4_container_initializing">Inicializē konteineru…</string>
     <string name="tc4_container_loading">Ielādē konteineru sarakstu…</string>
-    <string name="tc4_container_empty_with_link">Nav instalētu konteineru.\nLejupielādējiet konteinerus no oficiālās lapas un importējiet:\nhttps://www.github.com/tiny-computer/images/releases</string>
+    <string name="tc4_container_empty_with_link">Nav instalētu konteineru.\nLejupielādējiet konteinerus no oficiālās lapas un importējiet:\nhttps://github.com/duanluan/tiny-container-arch-images/releases</string>
     <string name="tc4_update_available">Jauna versija %1$s pieejama! Lūdzu, atjauniniet.</string>
     <string name="tc4_helper_cache_vars">Viens katrā rindā, atbalsta $CACHE_DIR un $CONTAINER_DIR</string>
     <string name="tc4_validate_yaml_line_error">Rinda %1$d: %2$s</string>

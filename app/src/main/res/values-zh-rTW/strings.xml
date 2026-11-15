@@ -236,7 +236,7 @@
 
     <string name="tc4_container_initializing">正在初始化容器...</string>
     <string name="tc4_container_loading">正在載入容器列表...</string>
-    <string name="tc4_container_empty_with_link">目前沒有安裝容器。\n請在官方容器頁面下載容器並匯入\nhttps://www.github.com/tiny-computer/images/releases</string>
+    <string name="tc4_container_empty_with_link">目前沒有安裝容器。\n請在官方容器頁面下載容器並匯入\nhttps://github.com/duanluan/tiny-container-arch-images/releases</string>
     <string name="tc4_update_available">發現新版本 %1$s，建議更新</string>
 
     <string name="tc4_helper_cache_vars">每行一條，支援 $CACHE_DIR 和 $CONTAINER_DIR</string>

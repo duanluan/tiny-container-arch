@@ -237,7 +237,7 @@
 
     <string name="tc4_container_initializing">Initialisation du conteneur…</string>
     <string name="tc4_container_loading">Chargement de la liste des conteneurs…</string>
-    <string name="tc4_container_empty_with_link">Aucun conteneur installé.\nTéléchargez des conteneurs depuis la page officielle et importez-les :\nhttps://www.github.com/tiny-computer/images/releases</string>
+    <string name="tc4_container_empty_with_link">Aucun conteneur installé.\nTéléchargez des conteneurs depuis la page officielle et importez-les :\nhttps://github.com/duanluan/tiny-container-arch-images/releases</string>
     <string name="tc4_update_available">Nouvelle version %1$s disponible\u00A0! Veuillez mettre à jour.</string>
 
     <string name="tc4_helper_cache_vars">Un par ligne, prend en charge $CACHE_DIR et $CONTAINER_DIR</string>

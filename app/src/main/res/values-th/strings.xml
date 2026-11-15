@@ -204,7 +204,7 @@
     <string name="tc4_help_description">ดูข้อมูลโครงการ รับความช่วยเหลือและอัปเดต</string>
     <string name="tc4_container_initializing">กำลังเริ่มต้นคอนเทนเนอร์…</string>
     <string name="tc4_container_loading">กำลังโหลดรายการคอนเทนเนอร์…</string>
-    <string name="tc4_container_empty_with_link">ไม่มีคอนเทนเนอร์ที่ติดตั้ง\nดาวน์โหลดคอนเทนเนอร์จากหน้าทางการและนำเข้า:\nhttps://www.github.com/tiny-computer/images/releases</string>
+    <string name="tc4_container_empty_with_link">ไม่มีคอนเทนเนอร์ที่ติดตั้ง\nดาวน์โหลดคอนเทนเนอร์จากหน้าทางการและนำเข้า:\nhttps://github.com/duanluan/tiny-container-arch-images/releases</string>
     <string name="tc4_update_available">มีเวอร์ชันใหม่ %1$s พร้อมใช้งาน! กรุณาอัปเดต</string>
     <string name="tc4_helper_cache_vars">หนึ่งรายการต่อบรรทัด รองรับ $CACHE_DIR และ $CONTAINER_DIR</string>
     <string name="tc4_validate_yaml_line_error">บรรทัด %1$d: %2$s</string>

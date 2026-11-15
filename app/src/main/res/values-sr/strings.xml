@@ -204,7 +204,7 @@
     <string name="tc4_help_description">Погледајте информације о пројекту, добијте помоћ и ажурирања</string>
     <string name="tc4_container_initializing">Иницијализација контејнера…</string>
     <string name="tc4_container_loading">Учитавање листе контејнера…</string>
-    <string name="tc4_container_empty_with_link">Нема инсталираних контејнера.\nПреузмите контејнере са званичне странице и увезите:\nhttps://www.github.com/tiny-computer/images/releases</string>
+    <string name="tc4_container_empty_with_link">Нема инсталираних контејнера.\nПреузмите контејнере са званичне странице и увезите:\nhttps://github.com/duanluan/tiny-container-arch-images/releases</string>
     <string name="tc4_update_available">Нова верзија %1$s је доступна! Ажурирајте молим.</string>
     <string name="tc4_helper_cache_vars">Једно по линији, подржава $CACHE_DIR и $CONTAINER_DIR</string>
     <string name="tc4_validate_yaml_line_error">Линија %1$d: %2$s</string>

@@ -236,7 +236,7 @@
 
     <string name="tc4_container_initializing">컨테이너 초기화 중…</string>
     <string name="tc4_container_loading">컨테이너 목록 로드 중…</string>
-    <string name="tc4_container_empty_with_link">설치된 컨테이너가 없습니다.\n공식 페이지에서 컨테이너를 다운로드하고 가져오세요:\nhttps://www.github.com/tiny-computer/images/releases</string>
+    <string name="tc4_container_empty_with_link">설치된 컨테이너가 없습니다.\n공식 페이지에서 컨테이너를 다운로드하고 가져오세요:\nhttps://github.com/duanluan/tiny-container-arch-images/releases</string>
     <string name="tc4_update_available">새 버전 %1$s이(가) 있습니다! 업데이트하세요.</string>
 
     <string name="tc4_helper_cache_vars">줄당 하나, $CACHE_DIR 및 $CONTAINER_DIR 지원</string>

@@ -236,7 +236,7 @@
 
     <string name="tc4_container_initializing">Menginisialisasi kontainer…</string>
     <string name="tc4_container_loading">Memuat daftar kontainer…</string>
-    <string name="tc4_container_empty_with_link">Tidak ada kontainer terinstal.\nUnduh kontainer dari halaman resmi dan impor:\nhttps://www.github.com/tiny-computer/images/releases</string>
+    <string name="tc4_container_empty_with_link">Tidak ada kontainer terinstal.\nUnduh kontainer dari halaman resmi dan impor:\nhttps://github.com/duanluan/tiny-container-arch-images/releases</string>
     <string name="tc4_update_available">Versi baru %1$s tersedia! Silakan perbarui.</string>
 
     <string name="tc4_helper_cache_vars">Satu per baris, mendukung $CACHE_DIR dan $CONTAINER_DIR</string>

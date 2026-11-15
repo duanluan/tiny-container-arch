@@ -81,12 +81,12 @@ class HelpFragment : Fragment() {
         HelpItem(
             titleRes = R.string.tc4_help_source_code_title,
             descriptionRes = R.string.tc4_help_source_code_desc,
-            url = "https://github.com/Cateners/tiny_container"
+            url = "https://github.com/duanluan/tiny-container-arch"
         ),
         HelpItem(
             titleRes = R.string.tc4_help_releases_title,
             descriptionRes = R.string.tc4_help_releases_desc,
-            url = "https://github.com/Cateners/tiny_container/releases"
+            url = "https://github.com/duanluan/tiny-container-arch/releases"
         ),
         HelpItem(
             titleRes = R.string.tc4_help_oss_title,

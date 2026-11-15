@@ -236,7 +236,7 @@
 
     <string name="tc4_container_initializing">कंटेनर आरंभ हो रहा है…</string>
     <string name="tc4_container_loading">कंटेनर सूची लोड हो रही है…</string>
-    <string name="tc4_container_empty_with_link">कोई कंटेनर इंस्टॉल नहीं है।\nआधिकारिक पृष्ठ से कंटेनर डाउनलोड करें और आयात करें:\nhttps://www.github.com/tiny-computer/images/releases</string>
+    <string name="tc4_container_empty_with_link">कोई कंटेनर इंस्टॉल नहीं है।\nआधिकारिक पृष्ठ से कंटेनर डाउनलोड करें और आयात करें:\nhttps://github.com/duanluan/tiny-container-arch-images/releases</string>
     <string name="tc4_update_available">नया संस्करण %1$s उपलब्ध है! कृपया अद्यतन करें।</string>
 
     <string name="tc4_helper_cache_vars">प्रति पंक्ति एक, $CACHE_DIR और $CONTAINER_DIR का समर्थन करता है</string>

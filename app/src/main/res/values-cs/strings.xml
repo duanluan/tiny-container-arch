@@ -237,7 +237,7 @@
 
     <string name="tc4_container_initializing">Inicializace kontejneru…</string>
     <string name="tc4_container_loading">Načítání seznamu kontejnerů…</string>
-    <string name="tc4_container_empty_with_link">Nejsou nainstalovány žádné kontejnery.\nStáhněte kontejnery z oficiální stránky a importujte:\nhttps://www.github.com/tiny-computer/images/releases</string>
+    <string name="tc4_container_empty_with_link">Nejsou nainstalovány žádné kontejnery.\nStáhněte kontejnery z oficiální stránky a importujte:\nhttps://github.com/duanluan/tiny-container-arch-images/releases</string>
     <string name="tc4_update_available">Nová verze %1$s je k dispozici! Aktualizujte prosím.</string>
 
     <string name="tc4_helper_cache_vars">Jeden na řádek, podporuje $CACHE_DIR a $CONTAINER_DIR</string>

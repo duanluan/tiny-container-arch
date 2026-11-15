@@ -204,7 +204,7 @@
     <string name="tc4_help_description">Tazama maelezo ya mradi, pata msaada na masasisho</string>
     <string name="tc4_container_initializing">Inaanzisha kontena…</string>
     <string name="tc4_container_loading">Inapakia orodha ya kontena…</string>
-    <string name="tc4_container_empty_with_link">Hakuna kontena zilizowekwa.\nPakua kontena kutoka ukurasa rasmi na uingize:\nhttps://www.github.com/tiny-computer/images/releases</string>
+    <string name="tc4_container_empty_with_link">Hakuna kontena zilizowekwa.\nPakua kontena kutoka ukurasa rasmi na uingize:\nhttps://github.com/duanluan/tiny-container-arch-images/releases</string>
     <string name="tc4_update_available">Toleo jipya %1$s linapatikana! Tafadhali sasisha.</string>
     <string name="tc4_helper_cache_vars">Moja kwa kila mstari, inaauni $CACHE_DIR na $CONTAINER_DIR</string>
     <string name="tc4_validate_yaml_line_error">Mstari %1$d: %2$s</string>
